@@ -1,2 +1,2 @@
-# TinderBoys
+# Tinder-Identities
 Tinder bot
