@@ -1,5 +1,6 @@
 import sys
 
+# Change this for the computer's preference
 preference = "sunflowers"
 
 out_f = sys.argv[1]
