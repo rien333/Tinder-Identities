@@ -9,5 +9,5 @@ tinder_token LONG122TOKEN354353HERE34343
 ```
 2. Install newest [pynder](https://github.com/charliewolf/pynder):
 ```
-$ pip install git+https://github.com/charliewolf/pynder.git
+$ sudo pip install git+https://github.com/charliewolf/pynder.git
 ```
