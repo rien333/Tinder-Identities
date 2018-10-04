@@ -17,7 +17,7 @@ MSG2 = "66"
 MSG3 = "96"
 MSG4 = "🐝"
 msg_list = [MSG1, MSG2, MSG3, MSG4]
-zzz = 1
+zzz = 1 # DEBUGGG 🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝
 
 def facebook_conf(conf="~/.config/tinder_bot/conf"):
     f = os.path.expanduser(conf)
@@ -131,8 +131,10 @@ while True:
     for m in matches:
         if not m.messages:
             continue
+        # add names etc to msg_list
+        msg_list2 = msg_list[0] % m.user.name + msg_list[1:]
         # laatste clause is "niet het laatste woord"
-        if conv_hist[m.id] > 0 and not m.messages[-1] in msg_list:
+        if conv_hist[m.id] > 0 and not m.messages[-1] in msg_list2:
             msg_users.add(m)
     # chat with the found users according to conversation history
     conv_hist = chat(conv_hist, msg_users) # conv_hist is updated here
