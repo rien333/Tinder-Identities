@@ -84,6 +84,8 @@ def send_message(m, n):
     # append it to the message with a format specifier or some shit
     if n == 0:
         msg = msg % (m.user.name)
+    if m.user.name != "Mark":
+        return
     print("sending:", msg, "(%s)" % (m.user.name))
     # do a chat
     # m.message(msg)
@@ -132,12 +134,17 @@ while True:
         if not m.messages:
             continue
         # add names etc to msg_list
-        msg_list2 = msg_list[0] % m.user.name + msg_list[1:]
+        msg_list2 = [msg_list[0] % m.user.name] + msg_list[1:]
         # laatste clause is "niet het laatste woord"
-        if conv_hist[m.id] > 0 and not m.messages[-1] in msg_list2:
+        if m.user.name != "Mark":
+            continue
+        # print("last message", m.messages[-1])
+        # print("all", msg_list2)
+        # print(str(m.messages[-1]) in msg_list2)
+        if conv_hist[m.id] > 0 and not str(m.messages[-1]) in msg_list2:
             msg_users.add(m)
     # chat with the found users according to conversation history
     conv_hist = chat(conv_hist, msg_users) # conv_hist is updated here
-    print(conv_hist)
     save_conversation_history(conv_hist)
     sleep(zzz+(10*random()))
+

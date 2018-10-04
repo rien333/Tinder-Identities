@@ -8,6 +8,7 @@ fb_id 2222222222
 tinder_token LONG122TOKEN354353HERE34343
 ```
 2. Install newest [pynder](https://github.com/charliewolf/pynder):
-```
+```bash
 $ sudo pip install git+https://github.com/charliewolf/pynder.git
 ```
+Pynder also needs [this patch](https://github.com/charliewolf/pynder/issues/199).
