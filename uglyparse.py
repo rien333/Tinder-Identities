@@ -19,7 +19,7 @@ for c, s in scores.items():
     if c in preferences:
         continue # skip
     # check wether a non prefered class scores higher than any of the prefered classes
-    if any(s > s1 for s1 in pref_scores)
+    if all(s > s1 for s1 in pref_scores)
         print("Swipe left!")
         exit(0)
 print("Swipe right!")
