@@ -6,6 +6,6 @@ while true
     python uglyparse.py /tmp/tinder_scores.txt
     # sometimes randomly sleep
     if random 0 1 | grep 1 > /dev/null
-        sleep random 0 5
+        sleep random 0 3
     end
 end
