@@ -1,6 +1,6 @@
 import sys
 from pynput import keyboard
-from pynput import Key, Controller
+from pynput.keyboard import Key, Controller
 keyboard=Controller()
 
 # Change this for the computer's preference
