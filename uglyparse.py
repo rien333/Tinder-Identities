@@ -2,7 +2,7 @@ import sys
 
 # Change this for the computer's preference
 # Swipe right when one of these preferences is met
-preferences = ["sunflowers", "roses", "lilies"]
+preferences = ["sunflowers", "roses", "daisy"]
 
 out_f = sys.argv[1]
 # keys: class names values: scores
