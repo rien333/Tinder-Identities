@@ -24,8 +24,8 @@ for c, s in scores.items():
     # check wether a non prefered class scores higher than any of the prefered classes
     if all(s > s1 for s1 in pref_scores):
         print("Swipe left!")
-	keyboard.press(Key.left)
-	keyboard.release(Key.left)
+        keyboard.press(Key.left)
+        keyboard.release(Key.left)
         exit(0)
 print("Swipe right!")
 keyboard.press(Key.right)
