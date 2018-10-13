@@ -1,6 +1,8 @@
 import sys
 from pynput import keyboard
 from pynput.keyboard import Key, Controller
+from time import sleep
+
 keyboard=Controller()
 
 # Change this for the computer's preference
@@ -30,3 +32,7 @@ for c, s in scores.items():
 print("Swipe right!")
 keyboard.press(Key.right)
 keyboard.release(Key.right)
+sleep(0.8)
+# press esc to get out of menu
+keyboard.press(Key.esc)
+keyboard.release(Key.esc)
