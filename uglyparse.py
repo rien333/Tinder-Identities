@@ -16,7 +16,7 @@ with open(out_f, "r") as f:
     for l in f:
         if "score" in l:
             s = float(l.split("=")[1][:-2])
-            c = l.split("=")[0].split(" ")[0]
+            c = l.split(" (")[0]
             scores[c] = s
 
 pref_scores = [scores[pref] for pref in preferences]
