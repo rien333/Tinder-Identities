@@ -19,12 +19,16 @@ parser.add_argument('--history', "-f", type=str, default="conversations.pkl",  h
 args = parser.parse_args()
 
 # CONVERSATIONS_F = "conversations.pkl"
-MSG1 = "Hey %s"
-MSG2 = "66"
-MSG3 = "96"
-MSG4 = "🐝%s"
-msg_list = [MSG1, MSG2, MSG3, MSG4]
+MSG1 = "Heyy %s wil je me helpen met een schoolproject? het zijn 3 vragen"
+MSG2 = "Ok vraag 1: wat zijn je 3 favo hobbies?"
+MSG3 = "ok cool, vraag 2: wat is je opleiding of baan"
+# Preference, reden
+MSG4 = 'cool! ik doe dit onderzoek voor universiteit leiden. volgens ons algoritme ben je een  "%s".  Ik heb je gematched omdat %s. Ben je het hier niet mee eens? kom naar de voorstelling op 19 november in SEXYLAND om de resultaten te zien, check het event op https://www.facebook.com/events/268049070514266/?__mref=mb'
+LAST_MESSAGE = "ok thanks. als je niet wilt dat je data wordt gebruikt laat dan weten in deze chat"
+msg_list = [MSG1, MSG2, MSG3, MSG4, LAST_MESSAGE]
 zzz = 10 # DEBUGGG 🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝
+# limit the people you're messaging
+LIMIT = -1
 
 def facebook_conf():
     f = os.path.expanduser(args.conf)
@@ -44,15 +48,15 @@ def facebook_conf():
             elif l.startswith("tinder_token"):
                 token = l.split(" ")[1]
             elif l.startswith("preference"):
-                preference = l.split(" ")[1]
+                preference = l.split(" ")[1].rstrip()
             elif l.startswith("reden"):
-                message = " ".join(l.split(" ")[1:])
+                reden = (" ".join(l.split(" ")[1:])).rstrip()
 
     # note that profiles should have a preference before chatting
     if None in [fb_id, token, preference]:
         print("Invalid configuration file. 😕")
         exit(0)
-    return fb_id, token, preference
+    return fb_id, token, preference, reden
 
 def matched_users(session):
     match_reader = session.matches()
@@ -84,6 +88,7 @@ def chat(conversations, matches):
     for m in matches:
         send_message(m, conversations[m.id])
         conversations[m.id] += 1
+        sleep(random() * 0.9) # 🐝 don't get caught as a bot, INCREASE?
     # return conversations with updates values
     return conversations
 
@@ -91,15 +96,11 @@ def send_message(m, n):
     if n < 4:
         msg = msg_list[n]
     else:
-        # could be a list that is just something random
-        msg = MSG4
+        msg = str(LAST_MESSAGE)# could be a list that is just something random
     # get the username from the match object and generate personal message?
     # append it to the message with a format specifier or some shit
     if n == 0:
         msg = msg % (m.user.name)
-    print(m.user.name)
-    if m.user.name != "Tristan" and  m.user.name != "put":
-        return
     print("sending:", msg, "(%s)" % (m.user.name))
     # do a chat
     m.message(msg)
@@ -113,9 +114,11 @@ def user_by_id(matches, m_id):
     # raise exception/return other random user?
     return None # not sure what would be good to return here
 
-fb_id, token, preference = facebook_conf() # pass in configuration if you want
+fb_id, token, preference, reden = facebook_conf() # pass in configuration if you want
 # need those named keywords
 session = pynder.Session(facebook_id=fb_id, facebook_token=token)
+# include preference and reden in msg_list
+msg_list = msg_list[:3] + [msg_list[3] % (preference, reden)] + msg_list[4:]
 
 # check if previous conversation history exists
 # if not, create a new one
@@ -147,12 +150,12 @@ while True:
     for m in matches:
         if not m.messages:
             continue
-        # add names etc to msg_list
+        # add names to msg_list
         msg_list2 = [msg_list[0] % m.user.name] + msg_list[1:]
         if conv_hist[m.id] > 0 and not str(m.messages[-1]) in msg_list2:
             msg_users.add(m)
+    # print(msg_list2)
     # chat with the found users according to conversation history
-    conv_hist = chat(conv_hist, msg_users) # conv_hist is updated here
+    conv_hist = chat(conv_hist, set(list(msg_users)[:LIMIT])) # conv_hist is updated here
     save_conversation_history(conv_hist)
-    sleep(zzz+(12*random()))
-
+    sleep(zzz+(8*random()))
