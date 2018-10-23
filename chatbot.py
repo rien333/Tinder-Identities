@@ -85,10 +85,15 @@ def save_conversation_history(conversations):
 
 def chat(conversations, matches):
     # go through all conversations that need to be updated
-    for m in matches:
-        send_message(m, conversations[m.id])
-        conversations[m.id] += 1
-        sleep(random() * 0.9) # 🐝 don't get caught as a bot, INCREASE?
+    try:
+        for m in matches:
+            send_message(m, conversations[m.id])
+            conversations[m.id] += 1
+            sleep(random() * 0.9) # 🐝 don't get caught as a bot, INCREASE?
+    except:
+        print("saving conf history")
+        save_conversation_history(conversations)
+        exit(0)
     # return conversations with updates values
     return conversations
 
@@ -103,7 +108,7 @@ def send_message(m, n):
         msg = msg % (m.user.name)
     print("sending:", msg, "(%s)" % (m.user.name))
     # do a chat
-    m.message(msg)
+    # m.message(msg)
     
 
 # return the right user object from some username
