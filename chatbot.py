@@ -89,7 +89,7 @@ def chat(conversations, matches):
         for m in matches:
             send_message(m, conversations[m.id])
             conversations[m.id] += 1
-            sleep(2.0 + (random() * 15.5)) # 🐝 don't get caught as a bot, INCREASE?
+            sleep(2.5 + (random() * 15.5)) # 🐝 don't get caught as a bot, INCREASE?
     except:
         print("saving conf history")
         save_conversation_history(conversations)
