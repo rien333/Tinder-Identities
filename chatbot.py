@@ -101,7 +101,8 @@ def send_message(m, n):
     if n < 4:
         msg = msg_list[n]
     else:
-        msg = str(LAST_MESSAGE)# could be a list that is just something random
+        # msg = str(LAST_MESSAGE)# could be a list that is just something random
+        return
     # get the username from the match object and generate personal message?
     # append it to the message with a format specifier or some shit
     if n == 0:
