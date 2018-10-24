@@ -26,7 +26,7 @@ MSG3 = "ok cool, vraag 2: wat is je opleiding of baan"
 MSG4 = 'cool! ik doe dit onderzoek voor universiteit leiden. volgens ons algoritme ben je een  "%s".  Ik heb je gematched omdat %s. Ben je het hier niet mee eens? kom naar de voorstelling op 19 november in SEXYLAND om de resultaten te zien, check het event op https://www.facebook.com/events/268049070514266/?__mref=mb'
 LAST_MESSAGE = "ok thanks. als je niet wilt dat je data wordt gebruikt laat dan weten in deze chat"
 msg_list = [MSG1, MSG2, MSG3, MSG4, LAST_MESSAGE]
-zzz = 10 # DEBUGGG 🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝
+zzz = 12 # DEBUGGG 🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝
 # limit the people you're messaging
 LIMIT = -1
 
@@ -89,7 +89,7 @@ def chat(conversations, matches):
         for m in matches:
             send_message(m, conversations[m.id])
             conversations[m.id] += 1
-            sleep(random() * 0.9) # 🐝 don't get caught as a bot, INCREASE?
+            sleep(2.0 + (random() * 15.5)) # 🐝 don't get caught as a bot, INCREASE?
     except:
         print("saving conf history")
         save_conversation_history(conversations)
@@ -108,7 +108,7 @@ def send_message(m, n):
         msg = msg % (m.user.name)
     print("sending:", msg, "(%s)" % (m.user.name))
     # do a chat
-    # m.message(msg)
+    m.message(msg)
     
 
 # return the right user object from some username
@@ -163,4 +163,4 @@ while True:
     # chat with the found users according to conversation history
     conv_hist = chat(conv_hist, set(list(msg_users)[:LIMIT])) # conv_hist is updated here
     save_conversation_history(conv_hist)
-    sleep(zzz+(8*random()))
+    sleep(zzz+(10*random()))
