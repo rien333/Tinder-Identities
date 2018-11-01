@@ -19,13 +19,10 @@ parser.add_argument('--history', "-f", type=str, default="conversations.pkl",  h
 args = parser.parse_args()
 
 # CONVERSATIONS_F = "conversations.pkl"
-MSG1 = "Heyy %s wil je me helpen met een schoolproject? het zijn 3 vragen"
-MSG2 = "Ok vraag 1: wat zijn je 3 favo hobbies?"
-MSG3 = "ok cool, vraag 2: wat is je opleiding of baan"
-# Preference, reden
-MSG4 = 'cool! ik doe dit onderzoek voor universiteit leiden. volgens ons algoritme ben je een  "%s".  Ik heb je gematched omdat %s. Ben je het hier niet mee eens? kom naar de voorstelling op 19 november in SEXYLAND om de resultaten te zien, check het event op https://www.facebook.com/events/268049070514266/?__mref=mb'
+MSG1 = "Hey %s wil je horen wat mijn algoritme over je zegt?"
+MSG2 = 'Mijn algoritme zegt dat jij een "%s" bent. Dit is gebaseerd op je foto omdat %s. We worden steeds vaker beoordeeld door algoritmes op internet. Wil je meer weten? Kom naar mijn event! Check https://waag.org/nl/event/data-dating-hokjesbots'
 LAST_MESSAGE = "ok thanks. als je niet wilt dat je data wordt gebruikt laat dan weten in deze chat"
-msg_list = [MSG1, MSG2, MSG3, MSG4, LAST_MESSAGE]
+msg_list = [MSG1, MSG2]
 zzz = 12 # DEBUGGG 🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝
 # limit the people you're messaging
 LIMIT = -1
@@ -98,7 +95,7 @@ def chat(conversations, matches):
     return conversations
 
 def send_message(m, n):
-    if n < 4:
+    if n < len(msg_list):
         msg = msg_list[n]
     else:
         # msg = str(LAST_MESSAGE)# could be a list that is just something random
@@ -124,7 +121,7 @@ fb_id, token, preference, reden = facebook_conf() # pass in configuration if you
 # need those named keywords
 session = pynder.Session(facebook_id=fb_id, facebook_token=token)
 # include preference and reden in msg_list
-msg_list = msg_list[:3] + [msg_list[3] % (preference, reden)] + msg_list[4:]
+msg_list = msg_list[:1] + [msg_list[1] % (preference, reden)]
 
 # check if previous conversation history exists
 # if not, create a new one
